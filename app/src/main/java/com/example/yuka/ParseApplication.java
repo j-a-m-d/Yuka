@@ -14,8 +14,8 @@ public class ParseApplication extends Application {
         ParseObject.registerSubclass(com.example.yuka.Post.class);
 
         Parse.initialize(new Parse.Configuration.Builder(this)
-                .applicationId("jamd-yuka")
-                .clientKey("yukajamd123")
-                .server("https://jamd-yuka.herokuapp.com/parse").build());
+                .applicationId("jam-d-yuka")
+                .clientKey("Tango150")
+                .server("https://jam-d-yuka.herokuapp.com/parse").build());
     }
 }

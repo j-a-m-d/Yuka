@@ -22,12 +22,12 @@ Vacation planning app, allows user to input preferences and will curate a vacati
 
 **Required Must-have Stories**
 
-[x] Users can log in or sign up
-[ ] User can view recommended locations to visit and enter detailed view when tapped
-[ ] User can save planned trips and start again after app is closed
-[ ] User can view favorites from a favorites fragment 
-[ ] Profile pages for each user
-[ ] User can see recent searches from their profile fragment
+- [x] Users can log in or sign up
+- [ ] User can view recommended locations to visit and enter detailed view when tapped
+- [ ] User can save planned trips and start again after app is closed
+- [ ] User can view favorites from a favorites fragment 
+- [ ] Profile pages for each user
+- [ ] User can see recent searches from their profile fragment
 
 **Optional Nice-to-have Stories**
 

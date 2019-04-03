@@ -37,6 +37,14 @@ Vacation planning app, allows user to input preferences and will curate a vacati
 * Allow users to interact with others on the same trip/ allow a private mode 
 * Planning to go on a trip with other individuals and share contact information. 
 
+## Video Walkthrough
+
+Here's a walkthrough of implemented user stories:
+
+<img src=Sprint1.gif/>
+
+GIF created with [LiceCap](http://www.cockos.com/licecap/).
+
 ### 2. Screen Archetypes
 
 * Login 

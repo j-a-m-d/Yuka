@@ -1,8 +1,5 @@
 package com.example.yuka;
 
-import android.os.Parcel;
-import android.preference.PreferenceActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -19,10 +16,10 @@ import org.parceler.Parcels;
 import butterknife.BindView;
 import cz.msebera.android.httpclient.Header;
 
-public class DetailActivity extends LocationBaseActivity {
+public class DetailActivity extends LocationActivity {
 
     public static final String YOUTUBE_API_KEY = "AIzaSyBZgL6maMjU4dHlJF7cGBheMP8_I4Ul7Fw";
-    public static final String TRAILERS_API = "https://api.themoviedb.org/3/movie/%d/videos?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
+    public static final String TRAILERS_API = "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
 
     TextView tvTitle;
     TextView tvOverview;

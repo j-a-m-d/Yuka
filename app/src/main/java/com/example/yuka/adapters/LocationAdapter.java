@@ -15,6 +15,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.yuka.DetailActivity;
+import com.example.yuka.R;
 import com.example.yuka.models.Location;
 
 import org.parceler.Parcels;

@@ -26,7 +26,7 @@ Vacation planning app, allows user to input preferences and will curate a vacati
 - [ ] User can view recommended locations to visit and enter detailed view when tapped
 - [ ] User can save planned trips and start again after app is closed
 - [ ] User can view favorites from a favorites fragment 
-- [ ] Profile pages for each user
+- [x] Profile pages for each user
 - [ ] User can see recent searches from their profile fragment
 
 **Optional Nice-to-have Stories**
@@ -39,9 +39,13 @@ Vacation planning app, allows user to input preferences and will curate a vacati
 
 ## Video Walkthrough
 
-Here's a walkthrough of implemented user stories:
+Here's a walkthrough of implemented user stories for week 1:
 
 <img src=Sprint1.gif/>
+
+For week 2:
+
+<img src=SprintWeek2.gif/>
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 

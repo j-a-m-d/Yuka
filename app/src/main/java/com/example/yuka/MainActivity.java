@@ -2,10 +2,14 @@ package com.example.yuka;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import com.example.yuka.fragments.ProfileFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,28 +19,35 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        final FragmentManager fragmentManager = getSupportFragmentManager();
+
         bottomNavigationView = findViewById(R.id.bottom_navigation);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Fragment fragment;
                 switch (item.getItemId()) {
                     case R.id.action_search:
-                        // lets get this bread(toast)... for now.
-                        Toast.makeText(MainActivity.this, "Search!", Toast.LENGTH_SHORT).show();
+                        fragment = new ProfileFragment();
+                        //Toast.makeText(MainActivity.this, "Home!", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.action_favorites:
-                        // lets get this bread(toast)... for now.
-                        Toast.makeText(MainActivity.this, "Favorites!", Toast.LENGTH_SHORT).show();
+                        fragment = new ProfileFragment();
+                        //Toast.makeText(MainActivity.this, "Compose!!!", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.action_profile:
-                        // lets get this bread(toast)... for now.
-                        Toast.makeText(MainActivity.this, "Profile!", Toast.LENGTH_SHORT).show();
+                    default:
+                        fragment = new ProfileFragment();
+                        //Toast.makeText(MainActivity.this, "Profile!!!", Toast.LENGTH_SHORT).show();
                         break;
                 }
+                fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).commit();
                 return true;
             }
         });
+        // Set default selection
+        bottomNavigationView.setSelectedItemId(R.id.action_profile);
     }
 }
 

@@ -39,10 +39,21 @@ Vacation planning app, allows user to input preferences and will curate a vacati
 
 ## Video Walkthrough
 
+<<<<<<< HEAD
 Here's a walkthrough of implemented user stories:
 
 <img src=Sprint1.gif/>
 
+=======
+Here's a walkthrough of implemented user stories for week 1:
+
+<img src=Sprint1.gif/>
+
+For week 2:
+
+<img src=SprintWeek2.gif/>
+
+>>>>>>> b6c31932a7681a493e9c38abed6233d7791ccec1
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ### 2. Screen Archetypes

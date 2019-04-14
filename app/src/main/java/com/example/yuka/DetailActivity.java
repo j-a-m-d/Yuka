@@ -4,8 +4,8 @@ import android.os.Bundle;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.example.yuka.models.Location;
+import com.example.yuka.adapters.LocationAdapter;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 

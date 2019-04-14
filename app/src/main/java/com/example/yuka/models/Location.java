@@ -1,6 +1,5 @@
 package com.example.yuka.models;
 
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -24,7 +23,7 @@ public class Location {
 
     public Location(JSONObject jsonObject) throws JSONException {
         posterPath = jsonObject.getString("poster_path");
-        title = jsonObject.getString("title");
+        title = jsonObject.getString("original_title");
         overview = jsonObject.getString("overview");
         backdropPath = jsonObject.getString("backdrop_path");
         voteAverage = jsonObject.getDouble("vote_average");

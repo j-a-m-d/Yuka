@@ -9,33 +9,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Parcel
-public class Location {
+public class Movie {
 
     double voteAverage;
-    int locationId;
+    int movieId;
     String posterPath;
     String title;
     String overview;
     String backdropPath;
 
-    public Location() {
+    public Movie() {
     }
 
-    public Location(JSONObject jsonObject) throws JSONException {
+    public Movie(JSONObject jsonObject) throws JSONException {
         posterPath = jsonObject.getString("poster_path");
-        title = jsonObject.getString("original_title");
+        title = jsonObject.getString("title");
         overview = jsonObject.getString("overview");
         backdropPath = jsonObject.getString("backdrop_path");
         voteAverage = jsonObject.getDouble("vote_average");
-        locationId = jsonObject.getInt("id");
+        movieId = jsonObject.getInt("id");
     }
 
-    public static List<Location> fromJsonArray(JSONArray locationjsonArray) throws JSONException {
-        List<Location> locations = new ArrayList<>();
-        for (int i = 0; i < locationjsonArray.length(); i++) {
-            locations.add(new Location(locationjsonArray.getJSONObject(i)));
+    public static List<Movie> fromJsonArray(JSONArray moviejsonArray) throws JSONException {
+        List<Movie> movies = new ArrayList<>();
+        for (int i = 0; i < moviejsonArray.length(); i++) {
+            movies.add(new Movie(moviejsonArray.getJSONObject(i)));
         }
-        return locations;
+        return movies;
     }
 
     public String getPosterPath() {
@@ -59,8 +59,7 @@ public class Location {
         return voteAverage;
     }
 
-    public int getLocationId() {
-        return locationId;
+    public int getMovieId() {
+        return movieId;
     }
 }
-

@@ -15,40 +15,41 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.yuka.DetailActivity;
 import com.example.yuka.R;
-import com.example.yuka.models.Location;
+import com.example.yuka.models.Movie;
 
 import org.parceler.Parcels;
 
 import java.util.List;
 
-public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHolder>{
+public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder>{
 
     Context context;
-    List<Location> locations;
+    List<Movie> movies;
 
-    public LocationAdapter(Context context, List<Location> locations) {
+    public MoviesAdapter(Context context, List<com.example.yuka.models.Movie> movies) {
         this.context = context;
-        this.locations = locations;
+        this.movies = movies;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_location, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_movie, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Location location = locations.get(position);
-        holder.bind(location);
+        Movie movie = movies.get(position);
+        holder.bind(movie);
     }
 
     @Override
     public int getItemCount() {
-        return locations.size();
+        return movies.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -66,19 +67,19 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
             container = itemView.findViewById(R.id.container);
         }
 
-        public void bind(final Location location) {
-            tvTitle.setText(location.getTitle());
-            tvOverview.setText(location.getOverview());
+        public void bind(final Movie movie) {
+            tvTitle.setText(movie.getTitle());
+            tvOverview.setText(movie.getOverview());
             // String imageUrl = movie.getPosterPath();
             // Reference the backdrop path if the phone is in landscape
             //if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
             //    imageUrl = movie.getBackdropPath();
-            Glide.with(context).load(location.getPosterPath()).into(ivPoster);
+            Glide.with(context).load(movie.getPosterPath()).into(ivPoster);
             container.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent i = new Intent(context, DetailActivity.class);
-                    i.putExtra("movie", Parcels.wrap(location));
+                    i.putExtra("movie", Parcels.wrap(movie));
                     context.startActivity(i);
                 }
             });

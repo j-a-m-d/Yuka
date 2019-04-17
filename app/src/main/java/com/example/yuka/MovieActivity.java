@@ -1,14 +1,13 @@
 package com.example.yuka;
 
-
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
-import com.example.yuka.adapters.LocationAdapter;
-import com.example.yuka.models.Location;
+import com.example.yuka.adapters.MoviesAdapter;
+import com.example.yuka.models.Movie;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -21,36 +20,37 @@ import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 
-public class LocationActivity extends AppCompatActivity {
+public class MovieActivity extends AppCompatActivity {
 
     private  static final String MOVIE_URL = "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
 
-    List<Location> locations;
+    List<Movie> movies;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_location);
-        RecyclerView rvLocation = findViewById(R.id.rvLocation);
+        setContentView(R.layout.activity_movie);
+        RecyclerView rvMovie = findViewById(R.id.rvMovie);
 
-        locations = new ArrayList<>();
-        final LocationAdapter adapter = new LocationAdapter(this, locations);
-        rvLocation.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false));
-        rvLocation.setAdapter(adapter);
+        movies = new ArrayList<>();
+        final MoviesAdapter adapter = new MoviesAdapter(this, movies);
+        rvMovie.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false));
+        rvMovie.setAdapter(adapter);
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.get(MOVIE_URL, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
-                    JSONArray locationJsonArray = response.getJSONArray("results");
-                    locations.addAll(Location.fromJsonArray(locationJsonArray));
+                    JSONArray movieJsonArray = response.getJSONArray("results");
+                    movies.addAll(Movie.fromJsonArray(movieJsonArray));
                     adapter.notifyDataSetChanged();
-                    Log.d("smile", locationJsonArray.toString());
+                    Log.d("smile", movieJsonArray.toString());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
+
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
@@ -59,4 +59,3 @@ public class LocationActivity extends AppCompatActivity {
         });
     }
 }
-

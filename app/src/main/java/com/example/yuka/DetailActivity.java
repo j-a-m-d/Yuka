@@ -1,11 +1,17 @@
 package com.example.yuka;
 
+import android.os.Parcel;
+import android.preference.PreferenceActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.example.yuka.models.Location;
-import com.example.yuka.adapters.LocationAdapter;
+import com.example.yuka.models.Movie;
+import com.google.android.youtube.player.YouTubeBaseActivity;
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerView;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -17,34 +23,35 @@ import org.parceler.Parcels;
 import butterknife.BindView;
 import cz.msebera.android.httpclient.Header;
 
-public class DetailActivity extends LocationActivity {
+public class DetailActivity extends YouTubeBaseActivity {
 
     public static final String YOUTUBE_API_KEY = "AIzaSyBZgL6maMjU4dHlJF7cGBheMP8_I4Ul7Fw";
-    public static final String TRAILERS_API = "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
+    public static final String TRAILERS_API = "https://api.themoviedb.org/3/movie/%d/videos?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
 
     TextView tvTitle;
     TextView tvOverview;
     RatingBar ratingBar;
+    YouTubePlayerView youTubePlayerView;
 
-    Location location;
+    Movie movie;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        /*ivlocationIcon = findViewById(R.id.ivLocationIcon)*/
         tvTitle = findViewById(R.id.tvTitle);
         tvOverview = findViewById(R.id.tvOverview);
         ratingBar = findViewById(R.id.ratingBar);
+        youTubePlayerView = findViewById(R.id.player);
 
-        location = (Location) Parcels.unwrap(getIntent().getParcelableExtra("location"));
-        tvTitle.setText(location.getTitle());
-        tvOverview.setText(location.getOverview());
-        ratingBar.setRating((float) location.getVoteAverage());
+        movie = (Movie) Parcels.unwrap(getIntent().getParcelableExtra("movie"));
+        tvTitle.setText(movie.getTitle());
+        tvOverview.setText(movie.getOverview());
+        ratingBar.setRating((float) movie.getVoteAverage());
 
         AsyncHttpClient client = new AsyncHttpClient();
-        client.get(String.format(TRAILERS_API, location.getLocationId()), new JsonHttpResponseHandler() {
+        client.get(String.format(TRAILERS_API, movie.getMovieId()), new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
@@ -53,6 +60,9 @@ public class DetailActivity extends LocationActivity {
                     if (results.length() == 0){
                         return;
                     }
+                    JSONObject movieTrailer = results.getJSONObject(0);
+                    String youtubeKey = movieTrailer.getString("key");
+                    initalizeYoutbe(youtubeKey);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -64,5 +74,19 @@ public class DetailActivity extends LocationActivity {
             }
         });
 
+    }
+
+    private void initalizeYoutbe(final String youtubeKey) {
+        youTubePlayerView.initialize(YOUTUBE_API_KEY, new YouTubePlayer.OnInitializedListener() {
+            @Override
+            public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
+                youTubePlayer.cueVideo(youtubeKey);
+            }
+
+            @Override
+            public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
+
+            }
+        });
     }
 }

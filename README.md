@@ -22,16 +22,16 @@ Vacation planning app, allows user to input preferences and will curate a vacati
 
 **Required Must-have Stories**
 
-- [x] Users can log in or sign up
+- [x] User can log in 
+- [x] User can sign up
 - [ ] User can view recommended locations to visit and enter detailed view when tapped
 - [ ] User can save planned trips and start again after app is closed
 - [ ] User can view favorites from a favorites fragment 
-- [ ] Profile pages for each user
-- [ ] User can see recent searches from their profile fragment
+- [x] Profile pages for each user
+- [x] User can see recent searches from their profile fragment
 
 **Optional Nice-to-have Stories**
 
-* User can leave reviews of places they visited or vacations they planned and taken
 * Page of most visited trips or most favorited trips/locations
 * Profile Add-On: settings page
 * Allow users to interact with others on the same trip/ allow a private mode 

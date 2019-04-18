@@ -2,10 +2,13 @@ package com.example.yuka;
 
 import android.os.Parcel;
 import android.preference.PreferenceActivity;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.yuka.models.Movie;
 import com.google.android.youtube.player.YouTubeBaseActivity;
@@ -20,6 +23,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.parceler.Parcels;
 
+import java.util.List;
+
 import butterknife.BindView;
 import cz.msebera.android.httpclient.Header;
 
@@ -27,6 +32,8 @@ public class DetailActivity extends YouTubeBaseActivity {
 
     public static final String YOUTUBE_API_KEY = "AIzaSyBZgL6maMjU4dHlJF7cGBheMP8_I4Ul7Fw";
     public static final String TRAILERS_API = "https://api.themoviedb.org/3/movie/%d/videos?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
+
+    private BottomNavigationView bottomNavigationView;
 
     TextView tvTitle;
     TextView tvOverview;
@@ -49,6 +56,8 @@ public class DetailActivity extends YouTubeBaseActivity {
         tvTitle.setText(movie.getTitle());
         tvOverview.setText(movie.getOverview());
         ratingBar.setRating((float) movie.getVoteAverage());
+
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.get(String.format(TRAILERS_API, movie.getMovieId()), new JsonHttpResponseHandler() {

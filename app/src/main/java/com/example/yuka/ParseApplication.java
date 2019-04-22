@@ -2,6 +2,7 @@ package com.example.yuka;
 
 import android.app.Application;
 
+import com.example.yuka.fragments.ProfileFragment;
 import com.parse.Parse;
 import com.parse.ParseObject;
 

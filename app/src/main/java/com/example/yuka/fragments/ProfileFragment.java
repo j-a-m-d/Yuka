@@ -12,6 +12,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.yuka.Post;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.example.yuka.LoginActivity;
 import com.example.yuka.R;
@@ -20,6 +23,7 @@ public class ProfileFragment extends Fragment {
 
     private final String TAG = "ProfileFragment";
 
+    public static final String KEY_USER = "user";
     private ImageView ivProfilePic;
     private TextView tvHandle;
     private Button btnRecentSearch;
@@ -40,7 +44,12 @@ public class ProfileFragment extends Fragment {
         tvHandle = view.findViewById(R.id.tvHandle);
         btnRecentSearch = view.findViewById(R.id.btnRecentSearch);
         btnLogout = view.findViewById(R.id.btnLogout);
+
         //view the user name
+
+        //tvHandle.setText(R.string.Username);
+
+
 
         //put log out button here
         btnLogout.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +69,8 @@ public class ProfileFragment extends Fragment {
     }
 
 }
+
+
 
 
 

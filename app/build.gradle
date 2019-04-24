@@ -30,7 +30,6 @@ dependencies {
     implementation 'com.parse:parse-android:1.17.3'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.8.1'
 
-
     implementation 'com.codepath.libraries:android-oauth-handler:1.4.0'
     implementation 'commons-codec:commons-codec:1.10'
     // added for text counter.

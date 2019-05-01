@@ -42,6 +42,10 @@ public class ProfileFragment extends Fragment {
         btnLogout = view.findViewById(R.id.btnLogout);
         //view the user name
 
+       //ParseUser user = new ParseUser().getCurrentUser();
+        // Set core properties
+        //tvHandle.setText((CharSequence) user);
+
         //put log out button here
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override

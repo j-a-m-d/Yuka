@@ -24,65 +24,114 @@ import org.parceler.Parcels;
 
 import java.util.List;
 
-public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder>{
+public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    // A menu item view type.
+    private static final int MENU_ITEM_VIEW_TYPE = 0;
 
-    Context context;
-    List<Movie> movies;
+    // The Native Express ad view type.
+    private static final int NATIVE_EXPRESS_AD_VIEW_TYPE = 1;
 
-    public MoviesAdapter(Context context, List<com.example.yuka.models.Movie> movies) {
-        this.context = context;
-        this.movies = movies;
+    // An Activity's Context.
+    private final Context mContext;
+
+    // The list of Native Express ads and menu items.
+    private final List<Object> mRecyclerViewItems;
+
+
+    public MoviesAdapter(Context context, List<Object> recyclerViewItems) {
+        this.mContext = context;
+        this.mRecyclerViewItems = recyclerViewItems;
     }
 
-    @NonNull
-    @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_movie, parent, false);
-        return new ViewHolder(view);
-    }
+    /**
+     * The {@link MenuItemViewHolder} class.
+     * Provides a reference to each view in the menu item view.
+     */
+    public class MenuItemViewHolder extends RecyclerView.ViewHolder {
+        private TextView menuItemName;
+        private TextView menuItemDescription;
+        private ImageView menuItemImage;
 
-    @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Movie movie = movies.get(position);
-        holder.bind(movie);
-    }
-
-    @Override
-    public int getItemCount() {
-        return movies.size();
-    }
-
-    class ViewHolder extends RecyclerView.ViewHolder {
-
-        TextView tvTitle;
-        TextView tvOverview;
-        ImageView ivPoster;
-        RelativeLayout container;
-
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            tvTitle = itemView.findViewById(R.id.tvTitle);
-            tvOverview = itemView.findViewById(R.id.tvOverview);
-            ivPoster =  itemView.findViewById(R.id.ivPoster);
-            container = itemView.findViewById(R.id.container);
+        MenuItemViewHolder(View view) {
+            super(view);
+            menuItemImage = (ImageView) view.findViewById(R.id.ivPoster);
+            menuItemName = (TextView) view.findViewById(R.id.tvTitle);
+            menuItemDescription = (TextView) view.findViewById(R.id.tvOverview);
         }
 
         public void bind(final Movie movie) {
-            tvTitle.setText(movie.getTitle());
-            tvOverview.setText(movie.getOverview());
-            // String imageUrl = movie.getPosterPath();
-            // Reference the backdrop path if the phone is in landscape
-            //if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
-            //    imageUrl = movie.getBackdropPath();
-            Glide.with(context).load(movie.getPosterPath()).into(ivPoster);
-            container.setOnClickListener(new View.OnClickListener() {
+            menuItemName.setText(movie.getName());
+            menuItemDescription.setText(movie.getDescription());
+            //Glide.with(mContext).load(movie.getPosterPath()).into(menuItemImage);
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent i = new Intent(context, DetailActivity.class);
+                    Intent i = new Intent(mContext, DetailActivity.class);
                     i.putExtra("movie", Parcels.wrap(movie));
-                    context.startActivity(i);
+                    mContext.startActivity(i);
                 }
             });
         }
     }
+
+    /**
+     * The {@link NativeExpressAdViewHolder} class.
+     */
+    public class NativeExpressAdViewHolder extends RecyclerView.ViewHolder {
+
+        NativeExpressAdViewHolder(View view) {
+            super(view);
+        }
+    }
+
+    @Override
+    public int getItemCount() {
+        return mRecyclerViewItems.size();
+    }
+
+    /**
+     * Creates a new view for a menu item view or a Native Express ad view
+     * based on the viewType. This method is invoked by the layout manager.
+     */
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+        switch (viewType) {
+            case MENU_ITEM_VIEW_TYPE:
+
+            default:
+                View menuItemLayoutView = LayoutInflater.from(viewGroup.getContext()).inflate(
+                        R.layout.item_movie, viewGroup, false);
+                return new MenuItemViewHolder(menuItemLayoutView);
+        }
+
+    }
+
+    /**
+     *  Replaces the content in the views that make up the menu item view and the
+     *  Native Express ad view. This method is invoked by the layout manager.
+     */
+
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        int viewType = getItemViewType(position);
+
+        switch (viewType) {
+            case MENU_ITEM_VIEW_TYPE:
+            default:
+                MenuItemViewHolder menuItemHolder = (MenuItemViewHolder) holder;
+                Movie menuItem = (Movie) mRecyclerViewItems.get(position);
+
+                // Get the menu item image resource ID.
+                String imageName = menuItem.getImageName();
+                int imageResID = mContext.getResources().getIdentifier(imageName, "drawable",
+                        mContext.getPackageName());
+
+                // Add the menu item details to the menu item view.
+                menuItemHolder.menuItemImage.setImageResource(imageResID);
+                menuItemHolder.menuItemName.setText(menuItem.getName());
+                menuItemHolder.menuItemDescription.setText(menuItem.getDescription());
+                menuItemHolder.bind(menuItem);
+        }
+    }
+
 }

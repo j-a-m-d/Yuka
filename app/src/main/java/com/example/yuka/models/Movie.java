@@ -1,65 +1,78 @@
 package com.example.yuka.models;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.parceler.Parcel;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Parcel
 public class Movie {
 
-    double voteAverage;
-    int movieId;
+    String name;
+    String description;
+    String price;
+    String category;
+    String imageName;
+    String time;
+    String venue;
+    String organizer;
     String posterPath;
-    String title;
-    String overview;
-    String backdropPath;
+
+    int movieId;
 
     public Movie() {
     }
 
-    public Movie(JSONObject jsonObject) throws JSONException {
-        posterPath = jsonObject.getString("poster_path");
-        title = jsonObject.getString("title");
-        overview = jsonObject.getString("overview");
-        backdropPath = jsonObject.getString("backdrop_path");
-        voteAverage = jsonObject.getDouble("vote_average");
-        movieId = jsonObject.getInt("id");
+    public Movie(String name, String description, String price, String category,
+                 String imageName, String time, String venue, String organizer, String posterPath) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.category = category;
+        this.imageName = imageName;
+        this.time = time;
+        this.venue = venue;
+        this.organizer = organizer;
+        this.posterPath = posterPath;
     }
 
-    public static List<Movie> fromJsonArray(JSONArray moviejsonArray) throws JSONException {
-        List<Movie> movies = new ArrayList<>();
-        for (int i = 0; i < moviejsonArray.length(); i++) {
-            movies.add(new Movie(moviejsonArray.getJSONObject(i)));
-        }
-        return movies;
-    }
 
     public String getPosterPath() {
         return String.format("https://image.tmdb.org/t/p/w342/%s", posterPath);
     }
 
-    public String getBackdropPath() {
-        return String.format("https://image.tmdb.org/t/p/w342/%s", backdropPath);
-
+    public String getName() {
+        return name;
     }
 
-    public String getTitle() {
-        return title;
+    public String getDescription() {
+        return description;
     }
 
-    public String getOverview() {
-        return overview;
+    public String getPrice() {
+        return price;
     }
 
-    public double getVoteAverage() {
-        return voteAverage;
+    public String getCategory() {
+        return category;
+    }
+
+    public String getImageName() {
+        return imageName;
     }
 
     public int getMovieId() {
         return movieId;
     }
+
+    public String getTime() {
+        return time;
+    }
+
+    public String getVenue() {
+        return venue;
+    }
+
+    public String getOrganizer() {
+        return organizer;
+    }
+
 }
+

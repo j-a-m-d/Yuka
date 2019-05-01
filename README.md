@@ -24,9 +24,9 @@ Vacation planning app, allows user to input preferences and will curate a vacati
 
 - [x] User can log in 
 - [x] User can sign up
-- [ ] User can view recommended locations to visit and enter detailed view when tapped
+- [x] User can view recommended locations to visit and enter detailed view when tapped
 - [ ] User can save planned trips and start again after app is closed
-- [x] User can view favorites from a favorites fragment 
+- [ ] User can view favorites from a favorites fragment 
 - [x] Profile pages for each user
 - [x] User can see recent searches from their profile fragment
 
@@ -53,8 +53,11 @@ For week 2:
 
 <img src=SprintWeek2.gif/>
 
-For week 4
+For week 4:
 <img src=SprintWeek4.gif/>
+
+For final week:
+<img src=SprintWeekFinal.gif/>
 
 >>>>>>> b6c31932a7681a493e9c38abed6233d7791ccec1
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
